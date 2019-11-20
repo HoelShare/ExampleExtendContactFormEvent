@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="ExampleExtendContactFormEvent\Custom\CustomDefinition">
+            <tag name="shopware.entity.definition" entity="custom"/>
+        </service>
+
+        <service id="ExampleExtendContactFormEvent\Core\ContactFormService" decorates="Shopware\Core\Content\ContactForm\ContactFormService">
+            <argument id="ExampleExtendContactFormEvent\Core\ContactFormService.inner" type="service"/>
+            <argument id="custom.repository" type="service"/>
+            <argument id="Shopware\Core\Checkout\Customer\Validation\CustomerProfileValidationService" type="service"/>
+            <argument id="Shopware\Core\Framework\Validation\DataValidator" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
+        </service>
+    </services>
+</container>
